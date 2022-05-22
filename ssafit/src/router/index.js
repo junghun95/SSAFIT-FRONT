@@ -4,9 +4,13 @@ import Board from '@/components/board/Board.vue'
 import BoardList from '@/components/board/BoardList.vue'
 import BoardDetail from '@/components/board/BoardDetail.vue'
 import BoardModify from '@/components/board/BoardModify.vue'
+
 import VideoList from '@/components/video/VideoList.vue'
 import LoginForm from '@/components/login/LoginForm.vue'
 import GeneralLoginForm from '@/components/login/GeneralLoginForm.vue'
+
+import HomeView from '@/views/HomeView.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -16,12 +20,12 @@ const routes = [
     component: Board,
     children: [
       {
-        path: 'list',
+        path: 'list/:category',
         name: 'boardList',
         component: BoardList,
       },
       {
-        path: 'detail',
+        path: 'detail/:id',
         name: 'boardDetail',
         component: BoardDetail,
       },
@@ -37,11 +41,6 @@ const routes = [
     name: 'video',
     component: VideoList,
   },
-  // {
-  //   path: '/videoDetail/:videoId',
-  //   name: 'videoDetail',
-  //   component: VideoDetail,
-  // }
   {
     path: '/login',
     name: 'login',
@@ -52,7 +51,13 @@ const routes = [
         name: 'generalLogin',
         component: GeneralLoginForm
       }
-    ]
+    ],
+  },
+  {
+    path: '/',
+    name: 'home',
+    component: HomeView
+
   },
 ]
 
