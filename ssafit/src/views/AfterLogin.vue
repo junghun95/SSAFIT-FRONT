@@ -1,5 +1,5 @@
 <template>
-    <div class = "after-login">
+    <div class = "after-login d-flex justify-md-center">
 
         <v-btn target="_blank" text>
             <v-icon>mdi-bell-outline</v-icon>
