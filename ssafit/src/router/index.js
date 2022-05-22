@@ -4,6 +4,7 @@ import Board from '@/components/board/Board.vue'
 import BoardList from '@/components/board/BoardList.vue'
 import BoardDetail from '@/components/board/BoardDetail.vue'
 import BoardModify from '@/components/board/BoardModify.vue'
+import Home from '@/views/Home.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -13,12 +14,12 @@ const routes = [
     component: Board,
     children: [
       {
-        path: 'list',
+        path: 'list/:category',
         name: 'boardList',
         component: BoardList,
       },
       {
-        path: 'detail',
+        path: 'detail/:id',
         name: 'boardDetail',
         component: BoardDetail,
       },
@@ -28,6 +29,11 @@ const routes = [
         component: BoardModify,
       }
     ]
+  },
+  {
+    path: '/',
+    name: 'home',
+    component: Home
   },
 ]
 
