@@ -11,7 +11,8 @@
             </div>
         </div>
         <hr>
-        <br>
+        <v-btn v-for="tag in getBoard.tags" :key="tag.id">{{tag.name}}</v-btn>
+        <br><br>
         <div>{{ getBoard.content }}</div>
         <br>
         <div>
