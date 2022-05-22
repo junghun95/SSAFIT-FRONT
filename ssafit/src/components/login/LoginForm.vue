@@ -6,9 +6,9 @@
         </v-card-title>
 
         <v-card-text>
-          <v-container class="d-flex align-flex">
+          <v-col>
             <v-row>
-                <v-btn dark @click.stop="dialogGeneral = true" text>
+                <v-btn dark @click="generalLoginDialogOpen">
                     <span class="mr-2">회원 로그인</span>
                 </v-btn>
             </v-row>
@@ -24,19 +24,19 @@
                     <span class="mr-2">회원 가입</span>
                 </v-btn>
             </v-row>
-          </v-container>
+          </v-col>
         </v-card-text>
 
         <v-card-actions>
             <v-spacer></v-spacer>
 
-            <v-btn color="green darken-1" text v-on:dialogGeneralClose="dialogGeneral = false">
+            <v-btn color="green darken-1" text @click="loginDialogClose">
                 취소
             </v-btn>
         </v-card-actions>
       </v-card>
 
-        <v-dialog v-model="dialogGeneral" width="500">
+        <v-dialog v-model="generalLoginDialog" @click:outside="generalLoginDialogClose" width="500">
             <general-login-form></general-login-form>
         </v-dialog>
   </div>
@@ -44,21 +44,30 @@
 
 <script>
 import GeneralLoginForm from './GeneralLoginForm.vue'
+import {mapState} from 'vuex'
 export default {
     name: 'LoginForm',
     data () {
       return {
-        dialogGeneral: false,
-        dialogSocial: false,
-        dialogJoin: false,
       }
     },
     components:{
         GeneralLoginForm,
     },
+    computed:{
+        ...mapState([
+            'generalLoginDialog'
+        ])
+    },
     methods:{
-        dialogGeneralClose(){
-            this.dialogGeneral = false;
+        loginDialogClose(){
+            this.$store.dispatch("closeLoginDialog")
+        },
+        generalLoginDialogClose(){
+            this.$store.dispatch("closeGeneralLoginDialog")
+        },
+        generalLoginDialogOpen(){
+            this.$store.dispatch("openGeneralLoginDialog")
         }
     }
 }
