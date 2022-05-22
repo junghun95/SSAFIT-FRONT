@@ -1,49 +1,46 @@
 <template>
-  <div class="video-list">
-      <h2>video list</h2>
-      <div class="video-search d-flex margin-auto">
-        <v-text-field placeholder="검색" v-model="search"></v-text-field>
-        <v-btn color="primary" elevation="2" outlined rounded>검색</v-btn>
-      </div>
+  <div>
+    <div v-if="searchVideos.length">
+      <h2 class="d-flex justify-center">검색결과</h2>
       <div class="video-list">
-          <h2 class="d-flex justify-center">리스트</h2> 
-          <div class="">
-            <v-row>
-                <v-col v-for="n in 9" :key="n" class="d-flex child-flex" cols="4">
-                    <v-img :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
-                        :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
-                        aspect-ratio="1"
-                        class="grey lighten-2"
-                    >
-                        <template v-slot:placeholder>
-                            <v-row
-                                class="fill-height ma-0"
-                                align="center"
-                                justify="center"
-                            >
-                                <v-progress-circular
-                                indeterminate
-                                color="grey lighten-5"
-                                ></v-progress-circular>
-                            </v-row>
-                        </template>
-                    </v-img>
-                </v-col>
-            </v-row>
-          </div>
+        <v-row>
+          <v-col class="card d-flex flex-wrap" v-for="(video, index) in searchVideos" :key="index" cols="4">
+            <div>
+            <iframe
+            width="320"
+            height="180"
+            :src="`${video.thumbnail}`"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            ></iframe>
+            </div>
+            <br/>
+          <div>{{video.title}}</div>
+          </v-col>
+        </v-row>
       </div>
+    </div>
+    <div v-else><h2 class="d-flex justify-center">검색어를 입력하세요</h2></div>
   </div>
 </template>
 
 <script>
-    export default {
-        name: 'VideoList',
-        data(){
-            return{
-                search: "",
-            }
-        }
+import {mapState} from 'vuex'
+export default {
+  name: "VideoList",
+  data(){
+    return{
+
     }
+  },
+  computed:{
+    ...mapState([
+      'searchVideos',
+    ])
+  }
+}
 </script>
 
 <style>
