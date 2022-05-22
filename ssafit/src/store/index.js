@@ -1,6 +1,7 @@
 
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -39,6 +40,14 @@ export default new Vuex.Store({
     boards: Array,
     loginDialog: false,
     generalLoginDialog: false,
+    searchVideos: [
+
+    ],
+    video: {
+      thumbnail: String,
+      id: String,
+      title: String
+    }
   },
   getters: {
     getUsername(state) {
@@ -190,7 +199,19 @@ export default new Vuex.Store({
     },
     OPEN_GENERAL_LOGIN_DIALOG(state) {
       state.generalLoginDialog = true;
-    }
+    },
+    SEARCH_YOUTUBE(state, videos) {
+      console.log(videos)
+      for (var content in videos) {
+        let video = {
+          thumbnail : videos[content].snippet.thumbnails.medium.url,
+          id: videos[content].id.videoId,
+          title: videos[content].snippet.title
+        }
+        state.searchVideos.push(video)
+      }
+    },
+  
   },
   actions: {
     getBoard({ commit }, id) {
@@ -225,7 +246,30 @@ export default new Vuex.Store({
     openGeneralLoginDialog(context) {
       context
       this.commit('OPEN_GENERAL_LOGIN_DIALOG')
-    }
+    },
+    searchYoutube({ commit }, value) {
+      const YOUTUBE_KEY = process.env.VUE_APP_YOUTUBE_API_KEY;
+      const API_URL = `https://www.googleapis.com/youtube/v3/search`
+
+      const params = {
+        key: YOUTUBE_KEY,
+        part: 'snippet',
+        type: 'video',
+        q: value,
+        maxResults: 10
+      }
+
+      axios({
+        url: API_URL,
+        method: 'GET',
+        params,
+      })
+        .then((res) => {
+          commit("SEARCH_YOUTUBE", res.data.items)
+        }).catch((err) => {
+          console.log(err);
+        })
+    },
   },
   modules: {
   }

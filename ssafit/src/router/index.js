@@ -5,11 +5,10 @@ import BoardList from '@/components/board/BoardList.vue'
 import BoardDetail from '@/components/board/BoardDetail.vue'
 
 
+import Video from '@/components/video/Video.vue'
 import VideoList from '@/components/video/VideoList.vue'
-import LoginForm from '@/components/login/LoginForm.vue'
-import GeneralLoginForm from '@/components/login/GeneralLoginForm.vue'
-
 import HomeView from '@/views/HomeView.vue'
+
 
 Vue.use(VueRouter)
 
@@ -34,19 +33,14 @@ const routes = [
   {
     path: '/video',
     name: 'video',
-    component: VideoList,
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: LoginForm,
+    component: Video,
     children: [
       {
-        path: 'general',
-        name: 'generalLogin',
-        component: GeneralLoginForm
+        path: 'list',
+        name: 'videoList',
+        component: VideoList,
       }
-    ],
+    ]
   },
   {
     path: '/',
