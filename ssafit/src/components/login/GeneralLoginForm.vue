@@ -9,7 +9,7 @@
             <v-form v-model="valid">
                 <v-container>
                     <v-row>
-                        <v-text-field v-model="firstname" :rules="nameRules" :counter="10" label="user name" required></v-text-field>
+                        <v-text-field v-model="username" :rules="nameRules" :counter="10" label="user name" required></v-text-field>
                     </v-row>
                     
                     <v-row>
@@ -21,20 +21,11 @@
 
         <v-card-actions>
             <v-spacer></v-spacer>
-
-            <v-btn
-                color="green darken-1"
-                text
-                @click=close()
-            >
+            <v-btn color="green darken-1" text @click="generalLoginDialogClose">
                 취소
             </v-btn>
 
-            <v-btn
-                color="green darken-1"
-                text
-                @click="dialog = false"
-            >
+            <v-btn color="green darken-1" text @click="dialog = false">
                 로그인
             </v-btn>
         </v-card-actions>
@@ -43,6 +34,7 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
     data(){
         return{
@@ -60,9 +52,14 @@ export default {
             ],
         }
     },
+    computed:{
+        ...mapState([
+            'generalLoginDialog'
+        ])
+    },
     methods:{
-        close(){
-            this.$emit('dialogGeneralClose')
+        generalLoginDialogClose(){
+            this.$store.dispatch("closeGeneralLoginDialog")
         }
     }
 }
