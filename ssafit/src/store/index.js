@@ -36,7 +36,9 @@ export default new Vuex.Store({
       isReport: false,
       isLiked: false
     },
-    boards: Array
+    boards: Array,
+    loginDialog: false,
+    generalLoginDialog: false,
   },
   getters: {
     getUsername(state) {
@@ -171,12 +173,24 @@ export default new Vuex.Store({
     },
     getBoard(state) {
       return state.board;
-    }
+    },
   },
   mutations: {
     GET_BOARD(state, board) {
       state.board = board;
     },
+    CLOSE_LOGIN_DIALOG(state) {
+      state.loginDialog = false;
+    },
+    OPEN_LOGIN_DIALOG(state) {
+      state.loginDialog = true;
+    },
+    CLOSE_GENERAL_LOGIN_DIALOG(state) {
+      state.generalLoginDialog = false;
+    },
+    OPEN_GENERAL_LOGIN_DIALOG(state) {
+      state.generalLoginDialog = true;
+    }
   },
   actions: {
     getBoard({ commit }, id) {
@@ -196,6 +210,22 @@ export default new Vuex.Store({
       };
       commit('GET_BOARD', board);
     },
+    closeLoginDialog(context) {
+      context
+      this.commit('CLOSE_LOGIN_DIALOG')
+    },
+    openLoginDialog(context) {
+      context
+      this.commit('OPEN_LOGIN_DIALOG')
+    },
+    closeGeneralLoginDialog(context) {
+      context
+      this.commit('CLOSE_GENERAL_LOGIN_DIALOG')
+    },
+    openGeneralLoginDialog(context) {
+      context
+      this.commit('OPEN_GENERAL_LOGIN_DIALOG')
+    }
   },
   modules: {
   }

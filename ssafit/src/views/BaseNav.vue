@@ -3,6 +3,7 @@
     <v-btn :to="{ name: 'home' }" text>
       <span class="mr-0">SSAFIT</span>
     </v-btn>
+
     <div class="d-flex justify-md-center flex-grow-1">
 
 
@@ -29,6 +30,7 @@
       <BeforeLogin v-if="!isLogin"></BeforeLogin>
       <AfterLogin v-else></AfterLogin>
     </div>
+
   </v-app-bar>
 </template>
 
