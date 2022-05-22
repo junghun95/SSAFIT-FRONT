@@ -4,7 +4,12 @@
             <v-list dense nav>
                 <v-list-item :to="{name: 'boardList', params:{category:'notice'}}">
                     <v-list-item-content>
-                         <v-list-item-title>공지사항</v-list-item-title>
+                         <v-list-item-title>소식통</v-list-item-title>
+                    </v-list-item-content>
+                </v-list-item>
+                <v-list-item :to="{name: 'boardList', params:{category:'bbom'}}">
+                    <v-list-item-content>
+                         <v-list-item-title>뽐내기</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
                 <v-list-item :to="{name: 'boardList', params:{category:'question'}}" >
