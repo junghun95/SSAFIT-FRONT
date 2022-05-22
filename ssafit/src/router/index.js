@@ -4,6 +4,9 @@ import Board from '@/components/board/Board.vue'
 import BoardList from '@/components/board/BoardList.vue'
 import BoardDetail from '@/components/board/BoardDetail.vue'
 import BoardModify from '@/components/board/BoardModify.vue'
+import VideoList from '@/components/video/VideoList.vue'
+import LoginForm from '@/components/login/LoginForm.vue'
+import GeneralLoginForm from '@/components/login/GeneralLoginForm.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -26,6 +29,28 @@ const routes = [
         path: 'modify',
         name: 'boardModify',
         component: BoardModify,
+      }
+    ]
+  },
+  {
+    path: '/video',
+    name: 'video',
+    component: VideoList,
+  },
+  // {
+  //   path: '/videoDetail/:videoId',
+  //   name: 'videoDetail',
+  //   component: VideoDetail,
+  // }
+  {
+    path: '/login',
+    name: 'login',
+    component: LoginForm,
+    children: [
+      {
+        path: 'general',
+        name: 'generalLogin',
+        component: GeneralLoginForm
       }
     ]
   },

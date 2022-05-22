@@ -14,7 +14,7 @@
     
     <v-spacer></v-spacer>
 
-    <v-btn :to="{name:'vedeo', params: {type: 'video'}}" text>
+    <v-btn :to="{name:'video', params: {type: 'video'}}" text>
       <span class="mr-0">운동 영상</span>
     </v-btn>
     <v-btn :to="{name:'board', params: {type: 'homt'}}" text>
