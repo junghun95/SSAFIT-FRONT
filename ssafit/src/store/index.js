@@ -171,6 +171,7 @@ export default new Vuex.Store({
     },
     getBoard(state) {
       return state.board;
+
     }
   },
   mutations: {
