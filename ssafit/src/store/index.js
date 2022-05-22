@@ -19,6 +19,10 @@ export default new Vuex.Store({
       isReport: false,
       isLiked: false
     },
+    tag: {
+      id: Int32Array,
+      name: String,
+    },
     board: {
       id: Int32Array,
       title: String,
@@ -27,15 +31,12 @@ export default new Vuex.Store({
       regDate: String,
       viewCnt: Int32Array,
       likes: Int32Array,
-      comments: {
-        comment: Array
-      },
+      tags: Array,
+      comments: Array,
       isReport: false,
       isLiked: false
     },
-    boards: {
-      board: Array
-    }
+    boards: Array
   },
   getters: {
     getUsername(state) {
@@ -46,117 +47,126 @@ export default new Vuex.Store({
     },
     getBoards(state) {
       const boards = [{
-          id: 1,
-          title: "hhhhh",
-          writer: 'hong',
-          content: 'hello',
-          regDate: '2022-05-22',
-          likes: 5,
-          comments: 44,
-          isReport: false,
-          isLiked: true
-        },
-        {
-          id: 2,
-          title: "jjjjj",
-          writer: 'hu',
-          content: 'hello2',
-          regDate: '2022-05-22',
-          likes: 5,
-          comments: 1,
-          isReport: false,
-          isLiked: false
-        },
-        {
-          id: 3,
-          title: "jjjjj",
-          writer: 'hu',
-          content: 'hello2',
-          regDate: '2022-05-22',
-          likes: 5,
-          comments: 1,
-          isReport: false,
-          isLiked: false
-        },
-        {
-          id: 4,
-          title: "jjjjj",
-          writer: 'hu',
-          content: 'hello2',
-          regDate: '2022-05-22',
-          likes: 5,
-          comments: 1,
-          isReport: false,
-          isLiked: false
-        },
-        {
-          id: 5,
-          title: "jjjjj",
-          writer: 'hu',
-          content: 'hello2',
-          regDate: '2022-05-22',
-          likes: 5,
-          comments: 1,
-          isReport: false,
-          isLiked: false
-        },
-        {
-          id: 6,
-          title: "jjjjj",
-          writer: 'hu',
-          content: 'hello2',
-          regDate: '2022-05-22',
-          likes: 5,
-          comments: 1,
-          isReport: false,
-          isLiked: false
-        },
-        {
-          id: 7,
-          title: "jjjjj",
-          writer: 'hu',
-          content: 'hello2',
-          regDate: '2022-05-22',
-          likes: 5,
-          comments: 1,
-          isReport: false,
-          isLiked: false
-        },
-        {
-          id: 8,
-          title: "jjjjj",
-          writer: 'hu',
-          content: 'hello2',
-          regDate: '2022-05-22',
-          likes: 5,
-          comments: 1,
-          isReport: false,
-          isLiked: false
-        },
-        {
-          id: 9,
-          title: "jjjjj",
-          writer: 'hu',
-          content: 'hello2',
-          regDate: '2022-05-22',
-          likes: 5,
-          comments: 1,
-          isReport: false,
-          isLiked: false
-        },
-        {
-          id: 10,
-          title: "jjjjj",
-          writer: 'hu',
-          content: 'hello2',
-          regDate: '2022-05-22',
-          likes: 5,
-          comments: 1,
-          isReport: false,
-          isLiked: false
-        },
+        id: 1,
+        title: "hhhhh",
+        writer: 'hong',
+        content: 'hello',
+        regDate: '2022-05-22',
+        likes: 5,
+        comments: 44,
+        tags: [
+          { id: 1, name: '등' }, { id: 2, name: '어깨' }
+        ],
+        isReport: false,
+        isLiked: true
+      },
+      {
+        id: 2,
+        title: "jjjjj",
+        writer: 'hu',
+        content: 'hello2',
+        regDate: '2022-05-22',
+        likes: 5,
+        tags: [
+          { id: 3, name: '복부' }, { id: 2, name: '어깨' }
+        ],
+        comments: 1,
+        isReport: false,
+        isLiked: false
+      },
+      {
+        id: 3,
+        title: "jjjjj",
+        writer: 'hu',
+        tags: [
+          { id: 1, name: '등' }, { id: 4, name: '요가' }
+        ],
+        content: 'hello2',
+        regDate: '2022-05-22',
+        likes: 5,
+        comments: 1,
+        isReport: false,
+        isLiked: false
+      },
+      {
+        id: 4,
+        title: "jjjjj",
+        writer: 'hu',
+        content: 'hello2',
+        regDate: '2022-05-22',
+        likes: 5,
+        comments: 1,
+        isReport: false,
+        isLiked: false
+      },
+      {
+        id: 5,
+        title: "jjjjj",
+        writer: 'hu',
+        content: 'hello2',
+        regDate: '2022-05-22',
+        likes: 5,
+        comments: 1,
+        isReport: false,
+        isLiked: false
+      },
+      {
+        id: 6,
+        title: "jjjjj",
+        writer: 'hu',
+        content: 'hello2',
+        regDate: '2022-05-22',
+        likes: 5,
+        comments: 1,
+        isReport: false,
+        isLiked: false
+      },
+      {
+        id: 7,
+        title: "jjjjj",
+        writer: 'hu',
+        content: 'hello2',
+        regDate: '2022-05-22',
+        likes: 5,
+        comments: 1,
+        isReport: false,
+        isLiked: false
+      },
+      {
+        id: 8,
+        title: "jjjjj",
+        writer: 'hu',
+        content: 'hello2',
+        regDate: '2022-05-22',
+        likes: 5,
+        comments: 1,
+        isReport: false,
+        isLiked: false
+      },
+      {
+        id: 9,
+        title: "jjjjj",
+        writer: 'hu',
+        content: 'hello2',
+        regDate: '2022-05-22',
+        likes: 5,
+        comments: 1,
+        isReport: false,
+        isLiked: false
+      },
+      {
+        id: 10,
+        title: "jjjjj",
+        writer: 'hu',
+        content: 'hello2',
+        regDate: '2022-05-22',
+        likes: 5,
+        comments: 1,
+        isReport: false,
+        isLiked: false
+      },
       ]
-      
+
       return state.boards = boards;
     },
     getBoard(state) {
@@ -164,22 +174,25 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    GET_BOARD(state, board){
+    GET_BOARD(state, board) {
       state.board = board;
     },
   },
   actions: {
-    getBoard({commit}, id){
-      const board={
+    getBoard({ commit }, id) {
+      const board = {
         id: id,
-          title: "jjjjj",
-          writer: 'hu',
-          content: 'hello2',
-          regDate: '2022-05-22',
-          likes: 5,
-          comments: 1,
-          isReport: false,
-          isLiked: false
+        title: "jjjjj",
+        writer: 'hu',
+        content: 'hello2',
+        regDate: '2022-05-22',
+        tags: [
+          { id: 3, name: '복부' }, { id: 2, name: '어깨' }
+        ],
+        likes: 5,
+        comments: 1,
+        isReport: false,
+        isLiked: false
       };
       commit('GET_BOARD', board);
     },
