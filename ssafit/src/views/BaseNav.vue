@@ -14,19 +14,19 @@
     
     <v-spacer></v-spacer>
 
-    <v-btn target="_blank" text>
+    <v-btn :to="{name:'vedeo', params: {type: 'video'}}" text>
       <span class="mr-0">운동 영상</span>
     </v-btn>
-    <v-btn target="_blank" text>
+    <v-btn :to="{name:'board', params: {type: 'homt'}}" text>
       <span class="mr-0">홈트</span>
     </v-btn>
-    <v-btn target="_blank" text>
-      <span class="mr-0">헬스</span>
+    <v-btn :to="{name:'board', params: {type: 'fitness'}}" text>
+      <span class="mr-0">피트니스</span>
     </v-btn>
-    <v-btn target="_blank" text>
+    <v-btn :to="{name:'board', params: {type: 'yogar'}}" text>
       <span class="mr-0">요가</span>
     </v-btn>
-    <v-btn target="_blank" text>
+    <v-btn :to="{name:'board', params: {type: 'pilates'}}" text>
       <span class="mr-0">필라테스</span>
     </v-btn>
 
