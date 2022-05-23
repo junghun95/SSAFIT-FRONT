@@ -15,7 +15,7 @@
 
             <v-row>
                 <v-btn  @click.stop="dialogSocial = true">
-                    <span class="mr-2">구글 계정으로 로그인하기</span>
+                    <img src="../icons/btn_google_signin_dark_focus_web.png"/>
                 </v-btn>
             </v-row>
 
