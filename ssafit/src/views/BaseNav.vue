@@ -27,7 +27,7 @@
       <v-btn icon>
         <SearchIcon></SearchIcon>
       </v-btn>
-      <BeforeLogin v-if="!isLogin"></BeforeLogin>
+      <BeforeLogin v-if="isLogin"></BeforeLogin>
       <AfterLogin v-else></AfterLogin>
     </div>
 
