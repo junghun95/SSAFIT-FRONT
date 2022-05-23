@@ -1,12 +1,12 @@
 <template>
   <div class="login-form">
-      <v-card height="300" rounded="true">
+      <v-card height="300" rounded="true" class = "flex">
         <v-card-title class="text-h5">
             로 그 인
         </v-card-title>
 
         <v-card-text>
-          <v-col>
+          <v-col class="flex">
             <v-row>
                 <v-btn dark @click="generalLoginDialogOpen">
                     <span class="mr-2">회원 로그인</span>
@@ -20,7 +20,7 @@
             </v-row>
 
             <v-row>
-                <v-btn @click.stop="dialogJoin = true">
+                <v-btn :to="{name: 'joinForm'}" @click="loginDialogClose">
                     <span class="mr-2">회원 가입</span>
                 </v-btn>
             </v-row>

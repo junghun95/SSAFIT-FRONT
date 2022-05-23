@@ -8,8 +8,8 @@ import BoardDetail from '@/components/board/BoardDetail.vue'
 import Video from '@/components/video/Video.vue'
 import VideoList from '@/components/video/VideoList.vue'
 import HomeView from '@/views/HomeView.vue'
-
-
+import UserDetail from '@/components/user/UserDetail.vue'
+import JoinForm from '@/components/join/JoinForm.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -48,6 +48,16 @@ const routes = [
     component: HomeView
 
   },
+  {
+    path: '/user',
+    name: 'userDetail',
+    component: UserDetail,
+  },
+  {
+    path: '/join',
+    name: 'joinForm',
+    component: JoinForm,
+  }
 ]
 
 const router = new VueRouter({

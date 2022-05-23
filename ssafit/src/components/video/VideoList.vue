@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="video-list">
     <div v-if="searchVideos.length">
       <h2 class="d-flex justify-center">검색결과</h2>
       <div class="video-list">
@@ -20,9 +20,9 @@
             <div>
               <v-btn @click="pushDetail">{{video.title}}</v-btn>
               <v-container>
-                <v-btn @click="showDetail" style="display:none;" ref="detail"></v-btn>
+                <v-btn @click="showDetail" style="display:none;" ref="videoDetail"></v-btn>
 
-                <v-dialog persistent max-width="700" v-model="detail">
+                <v-dialog persistent max-width="600" v-model="detail">
                   <MoDal header-title="Video 상세페이지" submit=1 submit-title="리뷰작성" hide-title="돌아가기"
                         @hide="hideDetail"
                       @submit="submitReview">
@@ -104,10 +104,11 @@ export default {
   },
   methods:{
     pushDetail(){
-      console.dir(event.target)
-      this.$refs.detail.$el.click();
+      // document.querySelector('#videoDetail').click();
+      this.$refs.videoDetail.$el.click()
     },
     showDetail(){
+      console.dir(event.target)
       this.detail = true;
     },
     hideDetail(){
@@ -119,7 +120,7 @@ export default {
     zzimVideo(video){
       this.$store.dispatch('zzimVideo', video)
     }
-  }
+  },
 }
 </script>
 
