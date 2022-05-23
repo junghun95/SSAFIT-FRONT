@@ -4,10 +4,10 @@
         <v-btn target="_blank" text>
             <v-icon>mdi-bell-outline</v-icon>
         </v-btn>
-        <v-btn target="_blank" text>
+        <v-btn text :to="{name: 'userDetail'}">
             <span class="mr-0">{{getUsername}}</span>
         </v-btn>
-        <v-btn target="_blank" text>
+        <v-btn text  @click="logout">
             <span class="mr-0">logout</span>
         </v-btn>
     </div>
@@ -21,6 +21,12 @@ export default {
     data(){
         return{
             "mdi-bell-outline" : mdiBellOutline,
+        }
+    },
+    methods:{
+        logout(){
+            this.$store.dispatch('doLogout')
+            this.$router.push('home')
         }
     },
     computed: {

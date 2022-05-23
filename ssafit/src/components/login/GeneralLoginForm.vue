@@ -9,11 +9,11 @@
             <v-form v-model="valid">
                 <v-container>
                     <v-row>
-                        <v-text-field v-model="username" :rules="nameRules" :counter="10" label="user name" required></v-text-field>
-                    </v-row>
-                    
-                    <v-row>
                         <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
+                    </v-row>
+
+                    <v-row>
+                        <v-text-field v-model="password" :rules="passwordRules" :counter="10" label="password" required></v-text-field>
                     </v-row>
                 </v-container>
             </v-form>
@@ -25,7 +25,7 @@
                 취소
             </v-btn>
 
-            <v-btn color="green darken-1" text @click="dialog = false">
+            <v-btn color="green darken-1" text @click="[login(), generalLoginDialogClose()]">
                 로그인
             </v-btn>
         </v-card-actions>
@@ -40,8 +40,8 @@ export default {
         return{
             dialog: false,
             valid: false,
-            username: '',
-            nameRules: [
+            password: '',
+            passwordRules: [
               v => !!v || 'Name is required',
               v => v.length <= 10 || 'Name must be less than 10 characters',
             ],
@@ -60,6 +60,14 @@ export default {
     methods:{
         generalLoginDialogClose(){
             this.$store.dispatch("closeGeneralLoginDialog")
+        },
+        login(){
+            const loginReq = {
+                email : this.email,
+                password : this.password
+            }
+            this.$store.dispatch('doLogin', loginReq);
+            this.$store.dispatch('closeLoginDialog')
         }
     }
 }
