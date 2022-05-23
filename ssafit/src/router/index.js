@@ -6,7 +6,6 @@ import BoardDetail from '@/components/board/BoardDetail.vue'
 
 
 import Video from '@/components/video/Video.vue'
-import VideoList from '@/components/video/VideoList.vue'
 import HomeView from '@/views/HomeView.vue'
 import UserDetail from '@/components/user/UserDetail.vue'
 import JoinForm from '@/components/join/JoinForm.vue'
@@ -34,13 +33,6 @@ const routes = [
     path: '/video',
     name: 'video',
     component: Video,
-    children: [
-      {
-        path: 'list',
-        name: 'videoList',
-        component: VideoList,
-      }
-    ]
   },
   {
     path: '/',
