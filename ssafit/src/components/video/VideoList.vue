@@ -17,7 +17,62 @@
             ></iframe>
             </div>
             <br/>
-          <div>{{video.title}}</div>
+            <div>
+              <v-btn @click="pushDetail">{{video.title}}</v-btn>
+              <v-container>
+                <v-btn @click="showDetail" style="display:none;" ref="detail"></v-btn>
+
+                <v-dialog persistent max-width="700" v-model="detail">
+                  <MoDal header-title="Video 상세페이지" submit=1 submit-title="리뷰작성" hide-title="돌아가기"
+                        @hide="hideDetail"
+                      @submit="submitReview">
+                      <template v-slot:body>
+                        <v-container fluid>
+                          <label>{{video.title}}</label>
+                          <iframe
+                          width="550"
+                          height="300"
+                          :src="`https://www.youtube.com/embed/${video.id}?autoplay=1`"
+                          title="YouTube video player"
+                          frameborder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowfullscreen
+                          ></iframe>
+                          <br>
+                          <label>리뷰</label>
+                          <div v-if="videoReviews.length">
+                            <v-simple-table fixed-header height="300px">
+                              <template v-slot:default>
+                                <thead>
+                                  <tr>
+                                    <th class="text-left">
+                                      작성자
+                                    </th>
+                                    <th class="text-left">
+                                      리뷰
+                                    </th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr v-for="(review, index) in videoReviews" :key="index">
+                                    <td>{{ review.writer }}</td>
+                                    <td>{{ review.content }}</td>
+                                  </tr>
+                                </tbody>
+                              </template>
+                            </v-simple-table>
+                          </div>
+                          <div v-else>작성된 리뷰가 없습니다.</div>
+                          <br>
+                          <v-btn @click="zzimVideo(video)">찜하기</v-btn>
+                          <v-textarea counter row="20" label="리뷰" v-model="review"></v-textarea>
+                        </v-container>
+                      </template>
+                  </MoDal>
+                
+                </v-dialog>
+              </v-container>
+            </div>
           </v-col>
         </v-row>
       </div>
@@ -28,17 +83,42 @@
 
 <script>
 import {mapState} from 'vuex'
+import MoDal from '@/components/util/MoDal.vue'
 export default {
   name: "VideoList",
   data(){
     return{
-
+      detail: false,
+      videoId : '',
+      title: '',
+      review: '',
     }
+  },
+  components:{
+    MoDal
   },
   computed:{
     ...mapState([
-      'searchVideos',
+      'searchVideos', 'videoReviews'
     ])
+  },
+  methods:{
+    pushDetail(){
+      console.dir(event.target)
+      this.$refs.detail.$el.click();
+    },
+    showDetail(){
+      this.detail = true;
+    },
+    hideDetail(){
+      this.detail = false;
+    },
+    submitReview(){
+      this.detail = false;
+    },
+    zzimVideo(video){
+      this.$store.dispatch('zzimVideo', video)
+    }
   }
 }
 </script>
