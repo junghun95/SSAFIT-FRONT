@@ -44,7 +44,7 @@ export default new Vuex.Store({
       isReport: false,
       isLiked: false
     },
-    boards: Array,
+    boards: [],
     loginDialog: false,
     generalLoginDialog: false,
     searchVideos: [
@@ -67,128 +67,7 @@ export default new Vuex.Store({
       return state.user;
     },
     getBoards(state) {
-      const boards = [{
-        id: 1,
-        title: "hhhhh",
-        writer: 'hong',
-        content: 'hello',
-        regDate: '2022-05-22',
-        likes: 5,
-        comments: 44,
-        tags: [
-          { id: 1, name: '등' }, { id: 2, name: '어깨' }
-        ],
-        isReport: false,
-        isLiked: true
-      },
-      {
-        id: 2,
-        title: "jjjjj",
-        writer: 'hu',
-        content: 'hello2',
-        regDate: '2022-05-22',
-        likes: 5,
-        tags: [
-          { id: 3, name: '복부' }, { id: 2, name: '어깨' }
-        ],
-        comments: 1,
-        isReport: false,
-        isLiked: false
-      },
-      {
-        id: 3,
-        title: "jjjjj",
-        writer: 'hu',
-        tags: [
-          { id: 1, name: '등' }, { id: 4, name: '요가' }
-        ],
-        content: 'hello2',
-        regDate: '2022-05-22',
-        likes: 5,
-        comments: 1,
-        isReport: false,
-        isLiked: false
-      },
-      {
-        id: 4,
-        title: "jjjjj",
-        writer: 'hu',
-        content: 'hello2',
-        regDate: '2022-05-22',
-        likes: 5,
-        comments: 1,
-        isReport: false,
-        isLiked: false
-      },
-      {
-        id: 5,
-        title: "jjjjj",
-        writer: 'hu',
-        content: 'hello2',
-        regDate: '2022-05-22',
-        likes: 5,
-        comments: 1,
-        isReport: false,
-        isLiked: false
-      },
-      {
-        id: 6,
-        title: "jjjjj",
-        writer: 'hu',
-        content: 'hello2',
-        regDate: '2022-05-22',
-        likes: 5,
-        comments: 1,
-        isReport: false,
-        isLiked: false
-      },
-      {
-        id: 7,
-        title: "jjjjj",
-        writer: 'hu',
-        content: 'hello2',
-        regDate: '2022-05-22',
-        likes: 5,
-        comments: 1,
-        isReport: false,
-        isLiked: false
-      },
-      {
-        id: 8,
-        title: "jjjjj",
-        writer: 'hu',
-        content: 'hello2',
-        regDate: '2022-05-22',
-        likes: 5,
-        comments: 1,
-        isReport: false,
-        isLiked: false
-      },
-      {
-        id: 9,
-        title: "jjjjj",
-        writer: 'hu',
-        content: 'hello2',
-        regDate: '2022-05-22',
-        likes: 5,
-        comments: 1,
-        isReport: false,
-        isLiked: false
-      },
-      {
-        id: 10,
-        title: "jjjjj",
-        writer: 'hu',
-        content: 'hello2',
-        regDate: '2022-05-22',
-        likes: 5,
-        comments: 1,
-        isReport: false,
-        isLiked: false
-      },
-      ]
-
-      return state.boards = boards;
+      return state.boards;
     },
     getBoard(state) {
       return state.board;
@@ -197,6 +76,13 @@ export default new Vuex.Store({
   mutations: {
     GET_BOARD(state, board) {
       state.board = board;
+    },
+    GET_BOARDS(state, boards){
+      console.log('GET_BOARDS called')
+      for(let board in boards){
+        state.boards.push(boards[board]);
+      }
+      console.log(state.boards)
     },
     CLOSE_LOGIN_DIALOG(state) {
       state.loginDialog = false;
@@ -233,6 +119,19 @@ export default new Vuex.Store({
   
   },
   actions: {
+    getBoards({commit}, params){
+      console.log(params)
+      axios({
+        url: 'http://localhost:8888/api/board/list',
+        method: 'GET',
+        params,
+      })
+        .then((res) => {
+          commit("GET_BOARDS", res.data.items)
+        }).catch((err) => {
+          console.log(err);
+        })
+    },
     getBoard({ commit }, id) {
       const board = {
         id: id,

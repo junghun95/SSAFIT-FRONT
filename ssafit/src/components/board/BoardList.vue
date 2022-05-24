@@ -29,16 +29,17 @@
                             </v-btn>
 
                             <v-dialog persistent max-width="600" v-model="dialog">
-                                <MoDal  header-title="텍스트" submit=1 @hide="hideDialog" @submit="submitDialog">
+                                <MoDal header-title="텍스트" submit=1 @hide="hideDialog" @submit="submitDialog">
                                     <template v-slot:body>
                                         <v-container fluid>
                                             <label>제목</label>
                                             <v-text-field placeholder="제목을 입력하시오" />
                                             <label>작성자</label>
-                                            <div>{{username}}</div>
+                                            <div>{{ username }}</div>
                                             <label>태그</label><br>
                                             <div class="tag-insert"></div>
-                                            <input type="text" placeholder="태그를 입력하시오."/><v-btn>+</v-btn>
+                                            <input type="text" placeholder="태그를 입력하시오." />
+                                            <v-btn>+</v-btn>
 
                                             <v-textarea counter row="20" label="내용"></v-textarea>
                                         </v-container>
@@ -66,7 +67,7 @@
                             <p>{{ board.content }}</p>
                             <div></div>
                             <div>
-                                <span>{{ board.writer }}</span>
+                                <span>{{ board.user.username }}</span>
                                 <span>&nbsp;·&nbsp;</span>
                                 {{ board.regDate }}
                             </div>
@@ -79,7 +80,7 @@
                 </li>
             </v-card>
         </ul>
-        <v-btn style="margin: 5px 5px 5px 5px; padding: 5px 5px 5px 5px;">더보기..</v-btn>
+        <v-btn style="margin: 5px 5px 5px 5px; padding: 5px 5px 5px 5px;" @click="more">더보기..</v-btn>
     </div>
 </template>
 <script>
@@ -94,16 +95,28 @@ export default {
     name: "BoardList",
     data() {
         return {
-            username:'hong',
+            username: 'hong',
             'mdi-cached': mdiCached,
             'mdi-fire': mdiFire,
-            dialog: false
+            dialog: false,
+            page: 0,
         }
+    },
+    props:{
+        category:String,
     },
     componenets: {
         LikeIcon,
     },
     methods: {
+        more() {
+            this.page += 5;
+            const params = {
+                category: this.category,
+                page: this.page
+            }
+            this.$store.dispatch('getBoards', params);
+        },
         showDialog() {
             this.dialog = true;
         },
@@ -120,6 +133,13 @@ export default {
         ...mapGetters([
             'getBoards'
         ]),
+    },
+    created() {
+        console.log(this.value);
+        const params = {
+            category: this.category
+        }
+        this.$store.dispatch('getBoards', params);
     }
 }
 </script>
