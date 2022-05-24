@@ -9,7 +9,7 @@
             <v-form v-model="valid">
                 <v-container>
                     <v-row>
-                        <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
+                        <v-text-field v-model="username" label="username" required></v-text-field>
                     </v-row>
 
                     <v-row>
@@ -45,11 +45,11 @@ export default {
               v => !!v || 'Password is required',
               v => v.length <= 10 || 'Password must be less than 10 characters',
             ],
-            email: '',
-            emailRules: [
-              v => !!v || 'E-mail is required',
-              v => /.+@.+/.test(v) || 'E-mail must be valid',
-            ],
+            username: '',
+            // emailRules: [
+            //   v => !!v || 'E-mail is required',
+            //   v => /.+@.+/.test(v) || 'E-mail must be valid',
+            // ],
         }
     },
     computed:{
@@ -62,8 +62,8 @@ export default {
             this.$store.dispatch("closeGeneralLoginDialog")
         },
         login(){
-            const loginReq = {
-                email : this.email,
+            let loginReq = {
+                username : this.username,
                 password : this.password
             }
             this.$store.dispatch('doLogin', loginReq);
