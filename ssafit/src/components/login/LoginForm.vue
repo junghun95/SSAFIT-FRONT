@@ -14,7 +14,7 @@
             </v-row>
 
             <v-row class="login-button">
-                <v-btn  @click.stop="dialogSocial = true">
+                <v-btn  @click="socialLogin">
                     <img src="../icons/btn_google_signin_dark_focus_web.png"/>
                 </v-btn>
             </v-row>
@@ -68,6 +68,9 @@ export default {
         },
         generalLoginDialogOpen(){
             this.$store.dispatch("openGeneralLoginDialog")
+        },
+        socialLogin(){
+            this.$store.dispatch("socialLogin")
         }
     }
 }

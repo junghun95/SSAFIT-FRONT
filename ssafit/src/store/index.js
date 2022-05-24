@@ -115,6 +115,10 @@ export default new Vuex.Store({
       
       state.user = user;
       state.isLogin = true;
+    },
+    SOCIAL_LOGIN(state, email) {
+      state.isLogin = true;
+      email
     }
   
   },
@@ -209,6 +213,13 @@ export default new Vuex.Store({
           router.push('home')
         }).catch((err) => {
           console.log(err);
+        })
+    },
+    socialLogin({commit}) {
+      axios.get('http://localhost:8888/api/auth/social/google')
+        .then((res) => {
+          console.log(res)
+          commit('SOCIAL_LOGIN', res)
         })
     },
     joinUser(context, userInfo) {
