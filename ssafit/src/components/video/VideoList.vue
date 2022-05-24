@@ -18,21 +18,21 @@
             </div>
             <br/>
             <div>
-              <v-btn @click="pushDetail">{{video.title}}</v-btn>
+              <v-btn @click="pushDetail(video)">{{video.title}}</v-btn>
               <v-container>
-                <v-btn @click="showDetail" style="display:none;" ref="videoDetail"></v-btn>
+                <v-btn @click="showDetail(video)" style="display:none;" :id="`${video.id}`"></v-btn>
 
-                <v-dialog persistent max-width="600" v-model="detail">
+                <v-dialog persistent max-width="600" v-model="video.modal">
                   <MoDal header-title="Video 상세페이지" submit=1 submit-title="리뷰작성" hide-title="돌아가기"
-                        @hide="hideDetail"
-                      @submit="submitReview">
+                        @hide="hideDetail(video)"
+                      @submit="submitReview(video)">
                       <template v-slot:body>
                         <v-container fluid>
                           <label>{{video.title}}</label>
                           <iframe
                           width="550"
                           height="300"
-                          :src="`https://www.youtube.com/embed/${video.id}?autoplay=1`"
+                          :src="`https://www.youtube.com/embed/${video.id}`"
                           title="YouTube video player"
                           frameborder="0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -40,7 +40,7 @@
                           ></iframe>
                           <br>
                           <label>리뷰</label>
-                          <div v-if="videoReviews.length">
+                          <div v-if="videoReviews == !null">
                             <v-simple-table fixed-header height="300px">
                               <template v-slot:default>
                                 <thead>
@@ -103,19 +103,17 @@ export default {
     ])
   },
   methods:{
-    pushDetail(){
-      // document.querySelector('#videoDetail').click();
-      this.$refs.videoDetail.$el.click()
+    pushDetail(video){
+      document.getElementById(video.id).click()
     },
-    showDetail(){
-      console.dir(event.target)
-      this.detail = true;
+    showDetail(video){
+      video.modal = true;
     },
-    hideDetail(){
-      this.detail = false;
+    hideDetail(video){
+      video.modal = false;
     },
-    submitReview(){
-      this.detail = false;
+    submitReview(video){
+      video.modal = false;
     },
     zzimVideo(video){
       this.$store.dispatch('zzimVideo', video)

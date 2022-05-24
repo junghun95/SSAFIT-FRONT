@@ -214,7 +214,8 @@ export default new Vuex.Store({
         let video = {
           thumbnail : videos[content].snippet.thumbnails.medium.url,
           id: videos[content].id.videoId,
-          title: videos[content].snippet.title
+          title: videos[content].snippet.title,
+          modal: false,
         }
         state.searchVideos.push(video)
       }
@@ -312,6 +313,14 @@ export default new Vuex.Store({
       userInfo
       // axios로 서버에 연결해서 회원가입시키기
       // 이미 등록된 유저일때는 어떻게하지?->응답을 보고 처리해서 다시 회원가입페이지로 보내야될듯
+    },
+    zzimVideo(context, video) {
+      context
+      video
+    },
+    homeSearch(context, keyword) {
+      context
+      keyword
     }
   },
   modules: {
