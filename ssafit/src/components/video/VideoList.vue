@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="video-list">
     <div v-if="searchVideos.length">
       <h2 class="d-flex justify-center">검색결과</h2>
       <div class="video-list">
@@ -22,7 +22,9 @@
               <v-container>
                 <v-btn @click="showDetail(video)" style="display:none;" :id="`${video.id}`"></v-btn>
 
-                <v-dialog persistent max-width="700" v-model="video.modal">
+
+                <v-dialog persistent max-width="600" v-model="video.modal">
+
                   <MoDal header-title="Video 상세페이지" submit=1 submit-title="리뷰작성" hide-title="돌아가기"
                         @hide="hideDetail(video)"
                       @submit="submitReview(video)">
@@ -40,7 +42,9 @@
                           ></iframe>
                           <br>
                           <label>리뷰</label>
+
                           <div v-if="videoReviews != null">
+
                             <v-simple-table fixed-header height="300px">
                               <template v-slot:default>
                                 <thead>
@@ -105,6 +109,7 @@ export default {
   methods:{
     pushDetail(video){
       document.getElementById(video.id).click();
+
     },
     showDetail(video){
       video.modal = true;

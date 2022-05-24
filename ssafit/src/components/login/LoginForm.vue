@@ -1,26 +1,26 @@
 <template>
   <div class="login-form">
-      <v-card height="300" rounded="true">
+      <v-card height="300" rounded="true" class = "flex">
         <v-card-title class="text-h5">
             로 그 인
         </v-card-title>
 
         <v-card-text>
-          <v-col>
-            <v-row>
+          <v-col class="flex">
+            <v-row class="login-button">
                 <v-btn dark @click="generalLoginDialogOpen">
                     <span class="mr-2">회원 로그인</span>
                 </v-btn>
             </v-row>
 
-            <v-row>
+            <v-row class="login-button">
                 <v-btn  @click.stop="dialogSocial = true">
                     <img src="../icons/btn_google_signin_dark_focus_web.png"/>
                 </v-btn>
             </v-row>
 
-            <v-row>
-                <v-btn @click.stop="dialogJoin = true">
+            <v-row class="login-button">
+                <v-btn :to="{name: 'joinForm'}" @click="loginDialogClose">
                     <span class="mr-2">회원 가입</span>
                 </v-btn>
             </v-row>
@@ -74,5 +74,9 @@ export default {
 </script>
 
 <style>
-
+.login-button{
+    display: table; 
+    margin-left: auto; 
+    margin-right: auto;
+}
 </style>

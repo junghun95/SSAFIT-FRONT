@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import VideoList from './VideoList.vue'
+import VideoList from '@/components/video/VideoList.vue'
 export default {
     name: 'VideoView',
     data(){
