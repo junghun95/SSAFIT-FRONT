@@ -2,6 +2,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import router from '@/router'
 
 Vue.use(Vuex)
 
@@ -15,6 +16,7 @@ export default new Vuex.Store({
       regDate: String,
       myComments: [],
       myVideos: [],
+      Authorization: String,
     },
     comment: {
       id: Int32Array,
@@ -297,16 +299,18 @@ export default new Vuex.Store({
       context
       this.commit('LOGOUT')
     },
-    doLogin(context, loginReq) {
-      //axios 요청보내서 로그인 성공하면 커밋하기
-      // 성공했으면 응답으로  user 정보 받아와서 mutation에 보내주기
-      // 실패하면 alert띄워서 확인하라고 하기 -> 그러고 로그인창을다시띄워줘야함
-      // 로그아웃했을때는 현재페이지에서 로그인로그아웃만 바뀌게-> loginform이 계속 더있는상태니까 수정
-      // 여기는 로직 수정해야함
-    
-      context
-      const user = loginReq
-      this.commit('LOGIN', user)
+    doLogin({commit}, user) {
+      axios.post(
+        'http://localhost:8888/api/auth/login',
+        user
+      )
+        .then((res) => {
+          console.log(res)
+          commit('LOGIN', user)
+          router.push('home')
+        }).catch((err) => {
+          console.log(err);
+        })
     },
     joinUser(context, userInfo) {
       context
